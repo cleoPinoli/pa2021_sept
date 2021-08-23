@@ -1,4 +1,4 @@
-public class Point2D { //TODO do we add an interface
+public class Point2D { //TODO do we add an interface + implements  Point
 
     private int x;
 

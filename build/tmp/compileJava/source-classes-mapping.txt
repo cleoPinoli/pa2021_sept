@@ -1,14 +1,24 @@
-MyPlane.java
- MyPlane
-ColorRGB.java
- ColorRGB
-Cursor.java
- Cursor
-MyCursor.java
- MyCursor
-Point2D.java
- Point2D
+Colors.java
+ Colors
 Main.java
  Main
+ColorRGB.java
+ ColorRGB
+GridPoint.java
+ GridPoint
+Point.java
+ Point
+Cursor.java
+ Cursor
 FileReader.java
  FileReader
+Point2D.java
+ Point2D
+BasicInstruction.java
+ BasicInstruction
+Instruction.java
+ Instruction
+MyCursor.java
+ MyCursor
+MyPlane.java
+ MyPlane
