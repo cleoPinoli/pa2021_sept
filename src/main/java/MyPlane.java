@@ -1,5 +1,7 @@
-import java.awt.*;
 import java.util.Arrays;
+import java.lang.Math;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MyPlane { //TODO singleton or not
 
@@ -8,7 +10,7 @@ public class MyPlane { //TODO singleton or not
     private ColorRGB currentBackground;
     private MyCursor myCursor;
     public Point2D getHome(){
-        return new Point2D(width/2, height/2);
+        return new CursorPoint(width/2, height/2);
     }
 
 
@@ -30,7 +32,7 @@ public class MyPlane { //TODO singleton or not
         currentBackground = Colors.COLOR_WHITE.getColor();
         areaFillingColor = Colors.COLOR_WHITE.getColor();
 
-        myCursor = MyCursor.getInstance();
+        myCursor = new MyCursor (getHome());
 
         this.plane = new GridPoint[width][height];
 
@@ -84,11 +86,76 @@ public class MyPlane { //TODO singleton or not
         return areaFillingColor;
     }
 
+
     public void setAreaFillingColor(ColorRGB areaFillingColor) {
         this.areaFillingColor = areaFillingColor;
     }
 
-    public void draw() {} // :)
+
+    public void moveCursor (int distance, boolean direction) { //direction = true -> forward; false -> backward;
+        short angle;
+        if (direction)
+            angle = myCursor.getDirection();
+        else
+            angle = (short)((myCursor.getDirection() + 180) % 360);
+
+        Point2D endPoint = getEndPoint(angle, distance, myCursor.getPosition());
+
+        if (myCursor.isPlot())
+            draw(myCursor.getPosition(), endPoint);
+
+        myCursor.setPosition(endPoint);
+
+    }
+
+
+    private void draw(Point2D beginPoint, Point2D endPoint) {
+        List<Point2D> points = computeLinePoints(beginPoint, endPoint);
+        points.stream().forEach(p -> {plane[p.getX()][p.getY()].setColor(myCursor.getLineColor());
+                                        plane[p.getX()][p.getY()].changeBackgroundStatus();
+                        });
+    }
+
+
+
+
+    private Point2D getEndPoint(short angle, int length, Point2D startingPoint) {
+        int startingX = startingPoint.getX();
+        int startingY = startingPoint.getY();
+        double aRadian = Math.toRadians(angle);
+
+        return new CursorPoint ((int)Math.round((startingX + length * Math.cos(aRadian))),
+                (int)Math.round((startingY + length * Math.sin(aRadian))));
+
+    }
+
+    private List<Point2D> computeLinePoints (Point2D point1, Point2D point2) {
+        int x1 = point1.getX();
+        int y1 = point1.getY();
+        int x2 = point2.getX();
+        int y2 = point2.getY();
+
+        int deltaX = Math.abs(x2 - x1);
+        int deltaY = Math.abs(y2 - y1);
+        int error = 0;
+        int y = y1;
+
+        List<Point2D> linePoints = new LinkedList<Point2D>();
+
+        for (int x = x1; x < x2; x++) {
+            linePoints.add(new CursorPoint(x, y));
+            error = error + deltaY;
+            if (2 * error >= deltaX) {
+                y++;
+                error -= deltaX;
+            }
+        }
+        return linePoints;
+    }
 
 
 }
+
+
+
+

@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class GridPoint extends Point2D {
+public class GridPoint extends CursorPoint {
     /**
      * Blah blah write stuff here.
      */

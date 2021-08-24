@@ -1,17 +1,17 @@
 Colors.java
  Colors
-Main.java
- Main
-ColorRGB.java
- ColorRGB
-GridPoint.java
- GridPoint
-Point.java
- Point
 Cursor.java
  Cursor
+ColorRGB.java
+ ColorRGB
 FileReader.java
  FileReader
+CursorPoint.java
+ CursorPoint
+Main.java
+ Main
+GridPoint.java
+ GridPoint
 Point2D.java
  Point2D
 BasicInstruction.java
