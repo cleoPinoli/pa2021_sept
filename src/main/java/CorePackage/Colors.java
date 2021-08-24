@@ -1,3 +1,7 @@
+package CorePackage;
+
+import CorePackage.ColorRGB;
+
 public enum Colors {
     /**
      *

@@ -1,4 +1,6 @@
-import java.awt.*;
+package CorePackage;
+
+import CorePackage.ColorRGB;
 
 public class GridPoint extends CursorPoint {
     /**

@@ -1,4 +1,4 @@
-
+package CorePackage;
 
 public class Main {
 
@@ -17,4 +17,4 @@ public class Main {
 
     }
 }
-//TODO LIST: -line size; -interpreter; -close area; -repeat n cmds; -tests; -exceptions; -javadoc;
+//TODO LIST: -line size; -interpreter; -close area; -repeat n cmds; -tests; -exceptions; -javadoc; clear file?

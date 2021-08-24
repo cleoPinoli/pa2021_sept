@@ -1,3 +1,7 @@
+package CorePackage;
+
+import CorePackage.*;
+
 import java.util.Arrays;
 import java.lang.Math;
 import java.util.LinkedList;
@@ -32,7 +36,7 @@ public class MyPlane { //TODO singleton or not
         currentBackground = Colors.COLOR_WHITE.getColor();
         areaFillingColor = Colors.COLOR_WHITE.getColor();
 
-        myCursor = new MyCursor (getHome());
+        myCursor = new MyCursor(getHome());
 
         this.plane = new GridPoint[width][height];
 
@@ -108,7 +112,7 @@ public class MyPlane { //TODO singleton or not
 
     }
 
-
+    //TODO we want the type of segment to be variable, extendible (like we can't just draw straight segments)
     private void draw(Point2D beginPoint, Point2D endPoint) {
         List<Point2D> points = computeLinePoints(beginPoint, endPoint);
         points.stream().forEach(p -> {plane[p.getX()][p.getY()].setColor(myCursor.getLineColor());

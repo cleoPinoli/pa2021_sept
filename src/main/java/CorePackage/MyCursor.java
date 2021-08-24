@@ -1,6 +1,10 @@
-import java.util.Objects;
+package CorePackage;
 
-public class MyCursor implements Cursor {
+import CorePackage.ColorRGB;
+import CorePackage.Colors;
+import CorePackage.Point2D;
+
+public class MyCursor {
 
     private ColorRGB areaColor;
 

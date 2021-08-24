@@ -1,3 +1,5 @@
+package CorePackage;
+
 public class CursorPoint implements Point2D {
 
     private int x;

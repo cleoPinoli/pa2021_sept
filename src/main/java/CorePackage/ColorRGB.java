@@ -1,3 +1,5 @@
+package CorePackage;
+
 public class ColorRGB {
 
     private byte red, green, blue;
