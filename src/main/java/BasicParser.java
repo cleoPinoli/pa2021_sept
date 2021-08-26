@@ -1,11 +1,13 @@
+import CorePackage.FileReader;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BasicInterpreter {
+public class BasicParser {
+    private FileReader fileReader; //filename aaa
 
-    //private List<String> instructionsList = new LinkedList<>();
+    public BasicParser() {
+        fileReader = new FileReader();
 
-    public BasicInterpreter() {
         //this.instructionsList = FileReader.readFile(); NOT SURE WE NEED THIS, Y'KNOW, MAYBE PASS A LIST TO THE METHOD
     }
 

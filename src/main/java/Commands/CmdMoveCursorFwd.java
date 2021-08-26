@@ -1,9 +1,15 @@
 package Commands;
 
-public class CmdMoveCursorFwd {
+import CorePackage.MyPlane;
 
-    public CmdMoveCursorFwd () {
-
+public class CmdMoveCursorFwd implements Command  {
+    private int distance;
+    public CmdMoveCursorFwd (int distance) {
+        this.distance = distance; //good lord
     }
 
+    @Override
+    public void execute(MyPlane plane) {
+        plane.moveCursor(distance, true);
+    }
 }

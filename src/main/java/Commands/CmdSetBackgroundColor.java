@@ -1,6 +1,9 @@
 package Commands;
 
-public class CmdSetBackgroundColor {
+import CorePackage.ColorRGB;
+import CorePackage.MyPlane;
+
+public class CmdSetBackgroundColor implements Command  {
 
     private byte red;
     private byte green;
@@ -10,5 +13,34 @@ public class CmdSetBackgroundColor {
         this.red = red;
         this.green = green;
         this.blue = blue;
+    }
+
+    public byte getRed() {
+        return red;
+    }
+
+    public void setRed(byte red) {
+        this.red = red;
+    }
+
+    public byte getGreen() {
+        return green;
+    }
+
+    public void setGreen(byte green) {
+        this.green = green;
+    }
+
+    public byte getBlue() {
+        return blue;
+    }
+
+    public void setBlue(byte blue) {
+        this.blue = blue;
+    }
+
+    @Override
+    public void execute(MyPlane plane) {
+        plane.changeBackground(new ColorRGB(red, green, blue));
     }
 }

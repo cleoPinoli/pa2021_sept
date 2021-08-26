@@ -26,6 +26,10 @@ public class MyPlane { //TODO singleton or not
         return height;
     }
 
+    public MyCursor getCursor () {
+        return this.myCursor;
+    }
+
     private GridPoint[][] plane;
 
     private ColorRGB areaFillingColor;
