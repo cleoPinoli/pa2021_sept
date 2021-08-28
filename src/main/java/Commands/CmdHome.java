@@ -1,12 +1,16 @@
 package Commands;
 
 import CorePackage.MyPlane;
+import java.util.Queue;
 
 public class CmdHome implements Command  {
 
-    public CmdHome () {
+    public CmdHome (Queue<String> context) {
 
     }
+
+
+
 
     @Override
     public void execute(MyPlane plane) {

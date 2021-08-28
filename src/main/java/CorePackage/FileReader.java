@@ -7,11 +7,11 @@ import java.util.stream.Stream;
 
 public class FileReader {
 
-    public static List<String> readFile () {
+    public static Queue<String> readFile (String path) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(
-                Objects.requireNonNull(FileReader.class.getResourceAsStream("/Test.txt"))));
+                Objects.requireNonNull(FileReader.class.getResourceAsStream(path))));
         return  reader.lines().flatMap( str -> Stream.of(str.split(" ")))
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(LinkedList::new));
     }
 
 

@@ -1,23 +1,33 @@
 package Commands;
 
 import CorePackage.MyPlane;
+import Exceptions.InvalidArgumentException;
+import Exceptions.MissingArgumentException;
 
-public class CmdRotateLeft implements Command {
-    private short angle;
-    public CmdRotateLeft (short angle) {
-        this.angle = angle;
-    }
+import java.util.NoSuchElementException;
+import java.util.Queue;
 
-    public short getAngle() {
-        return angle;
-    }
+public class CmdRotateLeft implements Command { //CCW
+    private int angle;
 
-    public void setAngle(short angle) {
-        this.angle = angle;
+
+    public CmdRotateLeft (Queue<String> context) throws MissingArgumentException, InvalidArgumentException {
+        try {
+            String token = context.remove();      //or poll (returns null if q is empty)
+            angle = Integer.parseInt(token);
+            if (angle>360 || angle<0)
+                throw new InvalidArgumentException("Invalid parameter for instruction LEFT (Expected: 0-360); Provided: " +angle+ ";)");
+        }
+        catch (NoSuchElementException e1) {
+            throw new MissingArgumentException("Couldn't find any parameter for instruction LEFT");
+        }
+        catch (NumberFormatException e2) {
+            throw new InvalidArgumentException("LEFT", "int"); //a/n, not sure about this one
+        }
     }
 
     @Override
     public void execute(MyPlane plane) {
-        plane.getCursor().setDirection(angle);
+        plane.getCursor().changeDirection(-angle);
     }
 }

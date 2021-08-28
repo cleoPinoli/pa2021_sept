@@ -4,9 +4,9 @@ public class Main {
 
     public static void main (String[] argv) {
 
-        //System.out.println("Hewwo");
         FileReader reader = new FileReader();
-        reader.readFile();
+        reader.readFile("/Test.txt");
+
 
         MyPlane blane = new MyPlane(50, 50);
         blane.printGrid();
@@ -17,4 +17,4 @@ public class Main {
 
     }
 }
-//TODO LIST: -line size; -interpreter; -close area; -repeat n cmds; -tests; -exceptions; -javadoc; clear file?
+//TODO LIST: -line size; -interpreter; -close area; -tests; -exceptions; -javadoc; clear file?

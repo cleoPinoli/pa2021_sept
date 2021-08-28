@@ -1,7 +1,5 @@
 package CorePackage;
 
-import CorePackage.*;
-
 import java.util.Arrays;
 import java.lang.Math;
 import java.util.LinkedList;
@@ -101,11 +99,11 @@ public class MyPlane { //TODO singleton or not
 
 
     public void moveCursor (int distance, boolean direction) { //direction = true -> forward; false -> backward;
-        short angle;
+        int angle;
         if (direction)
             angle = myCursor.getDirection();
         else
-            angle = (short)((myCursor.getDirection() + 180) % 360);
+            angle = (myCursor.getDirection() + 180) % 360;
 
         Point2D endPoint = getEndPoint(angle, distance, myCursor.getPosition());
 
@@ -127,7 +125,7 @@ public class MyPlane { //TODO singleton or not
 
 
 
-    private Point2D getEndPoint(short angle, int length, Point2D startingPoint) {
+    private Point2D getEndPoint(int angle, int length, Point2D startingPoint) {
         int startingX = startingPoint.getX();
         int startingY = startingPoint.getY();
         double aRadian = Math.toRadians(angle);

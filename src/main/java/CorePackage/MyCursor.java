@@ -1,9 +1,5 @@
 package CorePackage;
 
-import CorePackage.ColorRGB;
-import CorePackage.Colors;
-import CorePackage.Point2D;
-
 public class MyCursor {
 
     private ColorRGB areaColor;
@@ -12,7 +8,7 @@ public class MyCursor {
 
     private boolean plot;
 
-    private short direction; //TODO do we want to add a class idk
+    private int direction; //TODO do we want to add a class idk
 
     private Point2D position;
 
@@ -53,12 +49,12 @@ public class MyCursor {
         this.plot = plot;
     }
 
-    public short getDirection() {
+    public int getDirection() {
         return direction;
     }
 
-    public void setDirection(short direction) {
-        this.direction = (short) (direction % 360);
+    public void setDirection(int direction) {
+        this.direction = direction % 360;
     }
 
     public Point2D getPosition() {
@@ -75,5 +71,10 @@ public class MyCursor {
 
     public void setSize(byte size) {
         this.size = size;
+    }
+
+    public void changeDirection (int rotation) {
+        setDirection(getDirection()+rotation); //TODO test all cases here esp. negative rotation.
+
     }
 }
