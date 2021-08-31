@@ -1,19 +1,26 @@
 package CorePackage;
 
 import Commands.*;
-import CorePackage.FileReader;
-import Exceptions.InvalidArgumentException;
-import Exceptions.MissingArgumentException;
 import Exceptions.ParsingException;
-
 import java.util.*;
-import java.util.function.Function;
 
+
+/**
+ * Class that implements a basic parser that can recognize if certain
+ * strings are associated to a command of type Command.
+ * If so, the associated Command objects is instantiated.
+ *
+ * @author claudia.raffaelli@studenti.unicam.it
+ */
 public class BasicParser {
 
-private static Map<String, CheckedFunction<Queue<String>, Command>> commandsMap;
+    private static Map<String, CheckedFunction<Queue<String>, Command>> commandsMap;
 
 
+
+    /**
+     * Class constructor.
+     */
     public BasicParser() {
         commandsMap = new HashMap<>();
 
@@ -32,17 +39,36 @@ private static Map<String, CheckedFunction<Queue<String>, Command>> commandsMap;
         registerCommand("CLEARSCREEN", CmdClearPlane::new);
     }
 
+
+
+    /**
+     * Method called to register new commands.
+     *
+     * @param keyword a name suggesting the command's purpose
+     * @param function the function in charge of creating the new Command command.
+     */
     public static void registerCommand (String keyword, CheckedFunction<Queue<String>, Command> function) {
             commandsMap.put(keyword, function);
     }
 
 
-
+    /**
+     * Instructions parser taking instructions from a file.
+     *
+     * @param path the file's location
+     * @return a list of identified commands
+     */
     public static List<Command> parseInstructions(String path) {
         Queue<String> instructionsList = FileReader.readFile(path);
         return parseInstructions(instructionsList);
     }
 
+    /**
+     * Instructions parser taking instructions from a given queue.
+     *
+     * @param instructions a queue of strings to be examined
+     * @return a list of identified commands
+     */
     public static List<Command> parseInstructions(Queue<String> instructions) {
         List<Command> commandList = new LinkedList<>();
         try {
@@ -52,16 +78,11 @@ private static Map<String, CheckedFunction<Queue<String>, Command>> commandsMap;
                     CheckedFunction<Queue<String>, Command> myFunction = commandsMap.get(token);
                     commandList.add(myFunction.apply(instructions) );
                 }
-
-
-
             }
-
         } catch (ParsingException e) {
             System.out.println(e.getMessage());
         }
-
-        return commandList;
+      return commandList;
     }
 
 

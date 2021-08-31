@@ -8,7 +8,7 @@ public class MyCursor {
 
     private boolean plot;
 
-    private int direction; //TODO do we want to add a class idk
+    private int direction;
 
     private Point2D position;
 
@@ -54,7 +54,10 @@ public class MyCursor {
     }
 
     public void setDirection(int direction) {
-        this.direction = direction % 360;
+        if (direction>=0)
+            this.direction = direction % 360;
+        else
+            this.direction = (direction%360) + 360;
     }
 
     public Point2D getPosition() {

@@ -5,6 +5,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Class implementing a file reader for parsing purposes.
+ *
+ * @author claudia.raffaelli@studenti.unicam.it
+ */
 public class FileReader {
 
     public static Queue<String> readFile (String path) {

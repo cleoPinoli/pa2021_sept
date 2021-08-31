@@ -106,7 +106,7 @@ public class MyPlane { //TODO singleton or not
             angle = (myCursor.getDirection() + 180) % 360;
 
         Point2D endPoint = getEndPoint(angle, distance, myCursor.getPosition());
-
+        System.out.println(endPoint.getX()+" , "+endPoint.getY());
         if (myCursor.isPlot())
             draw(myCursor.getPosition(), endPoint);
 
@@ -115,9 +115,11 @@ public class MyPlane { //TODO singleton or not
     }
 
     //TODO we want the type of segment to be variable, extendible (like we can't just draw straight segments)
-    private void draw(Point2D beginPoint, Point2D endPoint) {
+    private void draw(Point2D beginPoint, Point2D endPoint) {   //TODO add parameter Line lineType uggggh
+        System.out.println("hello");
         List<Point2D> points = computeLinePoints(beginPoint, endPoint);
-        points.stream().forEach(p -> {plane[p.getX()][p.getY()].setColor(myCursor.getLineColor());
+        System.out.println("points to print: "+ points.size() );
+        points.stream().peek(p->System.out.println(p.getX()+", "+p.getY())).forEach(p -> {plane[p.getX()][p.getY()].setColor(myCursor.getLineColor());
                                         plane[p.getX()][p.getY()].changeBackgroundStatus();
                         });
     }
@@ -135,25 +137,32 @@ public class MyPlane { //TODO singleton or not
 
     }
 
-    private List<Point2D> computeLinePoints (Point2D point1, Point2D point2) {
+    private List<Point2D> computeLinePoints (Point2D point1, Point2D point2) { //TODO this has been copypasted into another class!!
         int x1 = point1.getX();
         int y1 = point1.getY();
         int x2 = point2.getX();
         int y2 = point2.getY();
 
         int deltaX = Math.abs(x2 - x1);
-        int deltaY = Math.abs(y2 - y1);
-        int error = 0;
-        int y = y1;
+        int deltaY = -Math.abs(y2 - y1);
 
         List<Point2D> linePoints = new LinkedList<Point2D>();
 
-        for (int x = x1; x < x2; x++) {
-            linePoints.add(new CursorPoint(x, y));
-            error = error + deltaY;
-            if (2 * error >= deltaX) {
-                y++;
-                error -= deltaX;
+        int sx = x1<x2 ? 1 : -1;
+
+        int sy = y1<y2 ? 1 : -1;
+        int error = deltaX+deltaY;  /* error value e_xy */
+        while (true) {
+            linePoints.add(new CursorPoint(x1, y1));
+            if (x1 == x2 && y1 == y2) { break; }
+            int error2 = 2 * error;
+            if (error2 >= deltaY) /* e_xy+e_x > 0 */ {
+                error += deltaY;
+                x1 += sx;
+            }
+            if (error2 <= deltaX) /* e_xy+e_y < 0 */ {
+                error += deltaX;
+            y1 += sy;
             }
         }
         return linePoints;

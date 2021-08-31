@@ -1,5 +1,10 @@
 package CorePackage;
 
+/**
+ * Class representing a color in RGB code 0-255.
+ *
+ * @author claudia.raffaelli@studenti.unicam.it
+ */
 public class ColorRGB {
 
     private byte red, green, blue;
