@@ -14,14 +14,14 @@ import java.util.*;
  */
 public class BasicParser {
 
-    private static Map<String, CheckedFunction<Queue<String>, Command>> commandsMap;
-
+    private Map<String, CheckedFunction<Queue<String>, Command>> commandsMap;
+    private static BasicParser basicParser;
 
 
     /**
      * Class constructor.
      */
-    public BasicParser() {
+    private BasicParser() {
         commandsMap = new HashMap<>();
 
         registerCommand("FORWARD", CmdMoveCursorFwd::new);
@@ -40,14 +40,19 @@ public class BasicParser {
     }
 
 
-
+    public static BasicParser getParser() {
+        if (Objects.isNull(basicParser)) {
+            basicParser = new BasicParser();
+        }
+        return basicParser;
+    }
     /**
      * Method called to register new commands.
      *
      * @param keyword a name suggesting the command's purpose
      * @param function the function in charge of creating the new Command command.
      */
-    public static void registerCommand (String keyword, CheckedFunction<Queue<String>, Command> function) {
+    public void registerCommand (String keyword, CheckedFunction<Queue<String>, Command> function) {
             commandsMap.put(keyword, function);
     }
 
@@ -58,7 +63,7 @@ public class BasicParser {
      * @param path the file's location
      * @return a list of identified commands
      */
-    public static List<Command> parseInstructions(String path) {
+    public List<Command> parseInstructions(String path) {
         Queue<String> instructionsList = FileReader.readFile(path);
         return parseInstructions(instructionsList);
     }
@@ -69,7 +74,7 @@ public class BasicParser {
      * @param instructions a queue of strings to be examined
      * @return a list of identified commands
      */
-    public static List<Command> parseInstructions(Queue<String> instructions) {
+    public List<Command> parseInstructions(Queue<String> instructions) {
         List<Command> commandList = new LinkedList<>();
         try {
             while (!instructions.isEmpty()) {

@@ -9,6 +9,7 @@ import java.util.*;
 public class CmdRepeat implements Command{
 
     private int times;
+
     private List<Command> commandList = new LinkedList<>(); //perhaps not the most optimal solution but i'll see
 
 
@@ -34,7 +35,7 @@ public class CmdRepeat implements Command{
                 commandTokensSequence.add(token);
                 token = context.remove();
             }
-            commandList.addAll(BasicParser.parseInstructions(commandTokensSequence));
+            commandList.addAll(BasicParser.getParser().parseInstructions(commandTokensSequence));
 
 
         } catch (NoSuchElementException e1) {

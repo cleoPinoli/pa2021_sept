@@ -1,62 +1,74 @@
 CorePackage/Colors.java
  CorePackage.Colors
-CorePackage/BasicParser.java
- CorePackage.BasicParser
+CorePackage/Program.java
+ CorePackage.Program
+Commands/CmdHome.java
+ Commands.CmdHome
 CorePackage/FileReader.java
  CorePackage.FileReader
 Exceptions/InvalidTokenException.java
  Exceptions.InvalidTokenException
-CorePackage/Line.java
- CorePackage.Line
-Exceptions/InvalidArgumentException.java
- Exceptions.InvalidArgumentException
+org/openjfx/FXMLController.java
+ org.openjfx.FXMLController
+CorePackage/MyPlane.java
+ CorePackage.MyPlane
+CorePackage/BasicParser.java
+ CorePackage.BasicParser
+Commands/CmdMoveCursorBwd.java
+ Commands.CmdMoveCursorBwd
+Commands/CmdClearPlane.java
+ Commands.CmdClearPlane
+CorePackage/ProgramElement.java
+ CorePackage.ProgramElement
 CorePackage/ColorRGB.java
  CorePackage.ColorRGB
 CorePackage/CheckedFunction.java
  CorePackage.CheckedFunction
-CorePackage/StraightLine.java
- CorePackage.StraightLine
+Commands/CmdPenDown.java
+ Commands.CmdPenDown
 CorePackage/CursorPoint.java
  CorePackage.CursorPoint
 Exceptions/ParsingException.java
  Exceptions.ParsingException
-Exceptions/MissingArgumentException.java
- Exceptions.MissingArgumentException
-CorePackage/MyCursor.java
- CorePackage.MyCursor
-CorePackage/Point2D.java
- CorePackage.Point2D
-CorePackage/GridPoint.java
- CorePackage.GridPoint
+Commands/CmdPenUp.java
+ Commands.CmdPenUp
 Commands/CmdSetPenColor.java
  Commands.CmdSetPenColor
-Commands/CmdHome.java
- Commands.CmdHome
 Commands/CmdSetPenSize.java
  Commands.CmdSetPenSize
-CorePackage/MyPlane.java
- CorePackage.MyPlane
 Commands/CmdRotateLeft.java
  Commands.CmdRotateLeft
 Commands/CmdSetBackgroundColor.java
  Commands.CmdSetBackgroundColor
 CorePackage/Main.java
  CorePackage.Main
+CorePackage/StraightLine.java
+ CorePackage.StraightLine
 Commands/CmdRepeat.java
  Commands.CmdRepeat
-Commands/CmdClearPlane.java
- Commands.CmdClearPlane
+CorePackage/Instruction.java
+ CorePackage.Instruction
 Commands/CmdSetFillColor.java
  Commands.CmdSetFillColor
 Commands/CmdRotateRight.java
  Commands.CmdRotateRight
 Commands/CmdMoveCursorFwd.java
  Commands.CmdMoveCursorFwd
+Exceptions/MissingArgumentException.java
+ Exceptions.MissingArgumentException
+Exceptions/InvalidArgumentException.java
+ Exceptions.InvalidArgumentException
+CorePackage/GridPoint.java
+ CorePackage.GridPoint
 Commands/Command.java
  Commands.Command
-Commands/CmdPenDown.java
- Commands.CmdPenDown
-Commands/CmdMoveCursorBwd.java
- Commands.CmdMoveCursorBwd
-Commands/CmdPenUp.java
- Commands.CmdPenUp
+CorePackage/MyCursor.java
+ CorePackage.MyCursor
+CorePackage/Line.java
+ CorePackage.Line
+CorePackage/Point2D.java
+ CorePackage.Point2D
+org/openjfx/MainApp.java
+ org.openjfx.MainApp
+org/openjfx/Launcher.java
+ org.openjfx.Launcher
