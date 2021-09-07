@@ -1,5 +1,9 @@
 package org.openjfx;
 
+import Commands.Command;
+import CorePackage.BasicParser;
+import CorePackage.MyPlane;
+import CorePackage.Program;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -9,36 +13,30 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("org.openjfx/scene.fxml"));
+        Parent root = loader.load();
+        FXMLController controller = loader.getController();
+        MyPlane plane = new MyPlane(1366, 768, controller.getMyPane());//Scene scene = new Scene(group, 1366, 768, Color.AZURE);
+        controller.givePlane(plane);
+
 
         primaryStage.setTitle("Hello World");
 
-        Group group = new Group();
 
-        /*MoveTo moveTo = new MoveTo(50, 100);
-        HLineTo hlineTo = new HLineTo(70);
-        QuadCurveTo quadCurveTo = new QuadCurveTo(120, 360, 100, 0);
-        LineTo lineTo = new LineTo(175, 55);
-        ArcTo arcTo = new ArcTo();
-        arcTo.setX(50);
-        arcTo.setY(50);
-        arcTo.setRadiusX(50);
-        arcTo.setRadiusY(50);
 
-        ClosePath closePath = new ClosePath();
 
-        Path path = new Path(moveTo, hlineTo, quadCurveTo, lineTo, arcTo, closePath);
-        path.setFill(Color.LIGHTSALMON);
 
-        group.getChildren().add(path);*/
+        //new Program(new ArrayList<>(BasicParser.getParser().parseInstructions("/Test.txt"))).run(plane);
 
-        Scene scene = new Scene(group, 1366, 768, Color.AZURE);
-
-        primaryStage.setScene(scene);
-
+        //primaryStage.setScene(plane.getCanvas());
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
 
     }

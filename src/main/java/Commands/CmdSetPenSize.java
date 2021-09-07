@@ -3,29 +3,32 @@ package Commands;
 import CorePackage.MyPlane;
 import Exceptions.InvalidArgumentException;
 import Exceptions.MissingArgumentException;
-
-import java.util.NoSuchElementException;
 import java.util.Queue;
 
-public class CmdSetPenSize implements Command {
+public class CmdSetPenSize extends BasicCommand {
 
     private byte size;
     public CmdSetPenSize (Queue<String> context) throws InvalidArgumentException, MissingArgumentException {
+
+        String token = "";
         try {
-            String token = context.remove();
+            token = context.remove();
             size = Byte.parseByte(token);
             if (size < 1)
-                throw new InvalidArgumentException("Invalid parameter for command SETPENSIZE (Expected: 1+; Provided: " + size + ";)");
-        } catch (NoSuchElementException e1) {
-            throw new MissingArgumentException("Couldn't find any parameter for instruction SETPENSIZE");
+                throw new InvalidArgumentException(getName(), "1+", Integer.toString(size));
         }
         catch (NumberFormatException e2) {
-            throw new InvalidArgumentException("SETPENSIZE","byte"); //TODO this can be generalized
+            throw new InvalidArgumentException(getName(),"int", token);
         }
     }
 
     @Override
     public void execute(MyPlane plane) {
-        plane.getCursor().setSize(size);
+        plane.getMyCursor().setSize(size);
+    }
+
+    @Override
+    public String getName() {
+        return "SETPENSIZE";
     }
 }

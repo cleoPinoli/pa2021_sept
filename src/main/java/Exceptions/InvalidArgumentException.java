@@ -6,7 +6,7 @@ public class InvalidArgumentException extends ParsingException {
         super(message);
     }
 
-    public InvalidArgumentException (String instructionName, String expectedType) {
-        super("Invalid parameter for instruction "+instructionName+". (Expected: "+expectedType+";)");
+    public InvalidArgumentException (String instructionName, String expectedType, String providedValue) {
+        super("Invalid parameter for instruction "+instructionName+". (Expected: "+expectedType+"; Provided: "+providedValue+ ")");
     }
 }

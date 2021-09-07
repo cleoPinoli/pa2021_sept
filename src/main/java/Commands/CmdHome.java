@@ -3,7 +3,7 @@ package Commands;
 import CorePackage.MyPlane;
 import java.util.Queue;
 
-public class CmdHome implements Command  {
+public class CmdHome extends BasicCommand  {
 
     public CmdHome (Queue<String> context) {
 
@@ -14,6 +14,11 @@ public class CmdHome implements Command  {
 
     @Override
     public void execute(MyPlane plane) {
-        plane.getCursor().setPosition(plane.getHome());
+        plane.getMyCursor().setPosition(plane.getHome());
+    }
+
+    @Override
+    public String getName() {
+        return "HOME";
     }
 }

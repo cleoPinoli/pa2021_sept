@@ -7,35 +7,35 @@ package CorePackage;
  */
 public class ColorRGB {
 
-    private byte red, green, blue;
+    private int red, green, blue;
 
-    public ColorRGB(byte red, byte green, byte blue) {
+    public ColorRGB(int red, int green, int blue) {
         this.red = red;
         this.green = green;
         this.blue = blue;
     } //TODO check invalid parameters
 
-    public byte getRed() {
+    public int getRed() {
         return red;
     }
 
-    public void setRed(byte red) {
+    public void setRed(int red) {
         this.red = red;
     }
 
-    public byte getGreen() {
+    public int getGreen() {
         return green;
     }
 
-    public void setGreen(byte green) {
+    public void setGreen(int green) {
         this.green = green;
     }
 
-    public byte getBlue() {
+    public int getBlue() {
         return blue;
     }
 
-    public void setBlue(byte blue) {
+    public void setBlue(int blue) {
         this.blue = blue;
     }
 

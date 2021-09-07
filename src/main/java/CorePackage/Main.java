@@ -7,16 +7,15 @@ import java.util.List;
 
 public class Main {
 
-    public static void main (String[] argv) {
+    //public static void main (String[] argv) {
 
-        MyPlane blane = new MyPlane(100, 100);
+    //MyPlane blane = new MyPlane(100, 100);
 
-        List<Command> commands = new ArrayList<>(BasicParser.getParser().parseInstructions("/Test.txt"));
+        /*List<Command> commands = new ArrayList<>(BasicParser.getParser().parseInstructions("/Test.txt"));
         Program program = new Program(commands);
         program.run(blane);
 
-        blane.printGrid();
+        blane.printGrid(); */
 
-    }
 }
 //TODO LIST: -line size; -close area; -tests; -exceptions; -javadoc; clear file?

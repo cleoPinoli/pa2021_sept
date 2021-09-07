@@ -1,5 +1,7 @@
 package CorePackage;
 
+import java.util.Objects;
+
 public class CursorPoint implements Point2D {
 
     private int x;
@@ -34,5 +36,16 @@ public class CursorPoint implements Point2D {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CursorPoint that = (CursorPoint) o;
+        return x == that.x && y == that.y;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
 }

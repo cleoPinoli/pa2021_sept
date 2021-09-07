@@ -4,13 +4,18 @@ import CorePackage.MyPlane;
 
 import java.util.Queue;
 
-public class CmdPenDown implements Command  {
+public class CmdPenDown extends BasicCommand  {
 
     public CmdPenDown (Queue<String> context) { }
 
     @Override
     public void execute(MyPlane plane) {
-      plane.getCursor().setPlot(true);
+      plane.getMyCursor().setPlot(true);
+    }
+
+    @Override
+    public String getName() {
+        return "PENDOWN";
     }
 }
 

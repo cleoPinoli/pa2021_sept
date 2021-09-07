@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="CommandsTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-09-06T14:42:25" hostname="DESKTOP-IM3HUNR" time="1.633">
+  <properties/>
+  <testcase name="moveFwdMissingArgumentTest()" classname="CommandsTest" time="0.994"/>
+  <testcase name="moveFwdInvalidArgumentTest()" classname="CommandsTest" time="0.231"/>
+  <testcase name="moveCursorFwdTest()" classname="CommandsTest" time="0.404"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[set 06, 2021 4:42:25 PM com.sun.javafx.application.PlatformImpl startup
+AVVERTENZA: Unsupported JavaFX configuration: classes were loaded from 'unnamed module @23ce9367'
+]]></system-err>
+</testsuite>

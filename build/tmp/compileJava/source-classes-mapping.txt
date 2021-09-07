@@ -1,23 +1,25 @@
 CorePackage/Colors.java
  CorePackage.Colors
-CorePackage/Program.java
- CorePackage.Program
+CorePackage/Line.java
+ CorePackage.Line
 Commands/CmdHome.java
  Commands.CmdHome
 CorePackage/FileReader.java
  CorePackage.FileReader
 Exceptions/InvalidTokenException.java
  Exceptions.InvalidTokenException
-org/openjfx/FXMLController.java
- org.openjfx.FXMLController
+CorePackage/Point2D.java
+ CorePackage.Point2D
 CorePackage/MyPlane.java
  CorePackage.MyPlane
-CorePackage/BasicParser.java
- CorePackage.BasicParser
+org/openjfx/Launcher.java
+ org.openjfx.Launcher
 Commands/CmdMoveCursorBwd.java
  Commands.CmdMoveCursorBwd
-Commands/CmdClearPlane.java
- Commands.CmdClearPlane
+CorePackage/MyCursor.java
+ CorePackage.MyCursor
+Commands/BasicCommand.java
+ Commands.BasicCommand
 CorePackage/ProgramElement.java
  CorePackage.ProgramElement
 CorePackage/ColorRGB.java
@@ -62,13 +64,13 @@ CorePackage/GridPoint.java
  CorePackage.GridPoint
 Commands/Command.java
  Commands.Command
-CorePackage/MyCursor.java
- CorePackage.MyCursor
-CorePackage/Line.java
- CorePackage.Line
-CorePackage/Point2D.java
- CorePackage.Point2D
+Commands/CmdClearPlane.java
+ Commands.CmdClearPlane
+CorePackage/BasicParser.java
+ CorePackage.BasicParser
+CorePackage/Program.java
+ CorePackage.Program
+org/openjfx/FXMLController.java
+ org.openjfx.FXMLController
 org/openjfx/MainApp.java
  org.openjfx.MainApp
-org/openjfx/Launcher.java
- org.openjfx.Launcher

@@ -6,5 +6,4 @@ public interface Point2D { //maybe we're never gonna need this, like, will we ev
     int getY();
     void setX (int value);
     void setY (int value);
-
 }

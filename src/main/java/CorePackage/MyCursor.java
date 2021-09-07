@@ -19,7 +19,7 @@ public class MyCursor {
         areaColor = Colors.COLOR_WHITE.getColor();
         lineColor = Colors.COLOR_BLACK.getColor();
         position = home;
-        direction = 90;
+        direction = 0;
         plot = true;
         size = 1;
     }

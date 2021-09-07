@@ -10,6 +10,11 @@ public class CmdPenUp implements Command {
 
     @Override
     public void execute(MyPlane plane) {
-        plane.getCursor().setPlot(false);
+        plane.getMyCursor().setPlot(false);
+    }
+
+    @Override
+    public String getName() {
+        return "PENUP";
     }
 }

@@ -1,6 +1,5 @@
 package Commands;
 
-import CorePackage.ColorRGB;
 import CorePackage.MyPlane;
 import Exceptions.InvalidArgumentException;
 import Exceptions.MissingArgumentException;
@@ -8,34 +7,31 @@ import Exceptions.MissingArgumentException;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 
-public class CmdSetBackgroundColor implements Command  {
+public class CmdSetBackgroundColor extends BasicCommand  {
 
-    private byte red;
-    private byte green;
-    private byte blue;
+    private int red;
+    private int green;
+    private int blue;
 
 
 
     public CmdSetBackgroundColor (Queue<String> context) throws MissingArgumentException, InvalidArgumentException {
+        String token = "";
         try {
-            String token = context.remove();
-            red = Byte.parseByte(token);
-            token = context.remove();
-            green = Byte.parseByte(token);
-            token = context.remove();
-            blue = Byte.parseByte(token);
-            if (red<0 || red >255)
-                throw new InvalidArgumentException("Invalid parameter for instruction SETSCREENCOLOR:RED (Expected: 0-255; Provided: " +red);
-            if (green<0 || green>255)
-            throw new InvalidArgumentException("Invalid parameter for instruction SETSCREENCOLOR:GREEN (Expected: 0-255; Provided: " +green);
-            if (blue<0 || blue>255)
-            throw new InvalidArgumentException("Invalid parameter for instruction SETSCREENCOLOR:BLUE (Expected: 0-255; Provided: " +blue);
-        }
-        catch (NoSuchElementException e1) {
-            throw new MissingArgumentException("Couldn't find any parameter for instruction SETSCREENCOLOR");
-        }
-        catch (NumberFormatException e2) {
-            throw new InvalidArgumentException("SETSCREENCOLOR", "byte");
+            token = getNextToken(context);
+            red = Integer.parseInt(token);
+            token = getNextToken(context);
+            green = Integer.parseInt(token);
+            token = getNextToken(context);
+            blue = Integer.parseInt(token);
+            if (red < 0 || red > 255)
+                throw new InvalidArgumentException(getName(), "Integer 0-255",Integer.toString(red));
+            if (green < 0 || green > 255)
+                throw new InvalidArgumentException(getName(), "Integer 0-255",Integer.toString(green));
+            if (blue < 0 || blue > 255)
+                throw new InvalidArgumentException(getName(), "Integer 0-255",Integer.toString(blue));
+        } catch (NumberFormatException e2) {
+            throw new InvalidArgumentException(getName(),"int", token);
         }
     }
 
@@ -43,6 +39,11 @@ public class CmdSetBackgroundColor implements Command  {
 
     @Override
     public void execute(MyPlane plane) {
-        plane.changeBackground(new ColorRGB(red, green, blue));
+        plane.changeBackground(red, green, blue);
+    }
+
+    @Override
+    public String getName() {
+        return "SETSCREENCOLOR";
     }
 }
