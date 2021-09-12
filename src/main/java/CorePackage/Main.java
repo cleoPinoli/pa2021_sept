@@ -18,4 +18,4 @@ public class Main {
         blane.printGrid(); */
 
 }
-//TODO LIST: -line size; -close area; -tests; -exceptions; -javadoc; clear file?
+//TODO LIST: -tests; -exceptions; -javadoc; clear file?

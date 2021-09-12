@@ -2,99 +2,76 @@ package CorePackage;
 
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
+import javafx.scene.shape.Rectangle;
 
-import java.util.Arrays;
 import java.lang.Math;
-import java.util.LinkedList;
 import java.util.List;
 
+
 public class MyPlane {
-    private Group group;
-    private ScrollPane scrollPane;
+
+
+
+    private ColorRGB areaFillingColor;
+    private ColorRGB lineColor;
+    private ColorRGB backgroundColor;
+    private int width, height;
     private MyCursor myCursor;
+    private Group group;
     private Path currentPath;
+    private Pane canvas; //TODO do we add an empty background rectangle? Why? How do we fix the coordinates not behaving properly (home?)?
+    private Rectangle rectangle;
 
     public Point2D getHome(){
-        return new CursorPoint( (int)(this.getWidth()/2), (int)(this.getHeight()/2) );
+        return new CursorPoint( (this.getWidth()/2), (this.getHeight()/2) );
     }
 
 
-    public int getWidth() {     return width;}
+    public int getWidth() { return width;}
 
     public int getHeight() {return height;}
 
     public MyCursor getMyCursor () {return this.myCursor;}
 
-    //private GridPoint[][] plane;
 
-    private ColorRGB areaFillingColor;
-    private ColorRGB lineColor;
-    private ColorRGB backgroundColor;
 
-    private int width, height;
 
     public Node getCanvas(){
-        return scrollPane;
+        return canvas ;
     }
 
-    public MyPlane (int width, int height, ScrollPane scrollPane) {
+    public MyPlane (int width, int height, Pane pane) {
         this.width = width;
         this.height = height;
+        group = new Group();
+
+        rectangle = new Rectangle(width, height, Color.WHITE);
+        rectangle.setStroke(Color.BLACK);
+        group.getChildren().add(rectangle);
+
         backgroundColor = Colors.COLOR_WHITE.getColor(); //TODO FIX THIS, maybe unnecessary
         areaFillingColor = Colors.COLOR_WHITE.getColor();
         myCursor = new MyCursor(getHome());
         currentPath = new Path(new MoveTo(getHome().getX(), getHome().getY()));
-        group = new Group();
         group.getChildren().add(currentPath);
 
-        this.scrollPane = scrollPane;
-        scrollPane.setPrefSize(width, height);
-        scrollPane.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
-        scrollPane.setContent(group);
-
-        /*this.plane = new GridPoint[width][height];
-
-        for (int i=0; i<width; i++) {
-            for(int j=0; j<height; j++) {
-                plane[i][j] = new GridPoint(i, j);
-            }
-        }*/
+        canvas = pane;
+        canvas.setMaxWidth(width);
+        canvas.setMaxHeight(height);
+        canvas.getChildren().add(group);
 
     }
 
-    /*public void printGrid () {  //for debugging purposes
-        for (GridPoint[] row: plane) {
-            for (GridPoint gp: row)     {
-                if ( gp.getColor().equals(Colors.COLOR_WHITE.getColor()) ) {
-                    System.out.print("W ");
-                }
-                else if ( gp.getColor().equals((Colors.COLOR_BLACK.getColor()))) {
-                    System.out.print("B ");
-                }
-                else
-                    System.out.print("- ");
-
-            } System.out.println();
-        }
-    }*/
-
 
     public void changeBackground (int red, int green, int blue) {
-        scrollPane.setBackground(new Background(new BackgroundFill(Color.rgb(red, green, blue), null, null)));
-
-        /*for (GridPoint[] row: plane) { //I'm keeping this for now
-            Arrays.stream(row).filter(gp -> gp.isBackground()).forEach(gp -> gp.setColor(newColor));
-        }*/
-
-
+        canvas.setBackground(new Background(new BackgroundFill(Color.rgb(red, green, blue), null, null)));
     }
 
     public void clearPlane () {
@@ -121,8 +98,9 @@ public class MyPlane {
     public void setLineColor(ColorRGB lineColor) {
         this.lineColor = lineColor;
         currentPath = new Path(new MoveTo(myCursor.getPosition().getX(), myCursor.getPosition().getY()));
-        group.getChildren().add(currentPath);
         currentPath.setStroke(Color.rgb(lineColor.getRed(), lineColor.getGreen(), lineColor.getBlue()));
+        group.getChildren().add(currentPath);
+
     }
 
 
@@ -153,11 +131,9 @@ public class MyPlane {
             currentPath.getElements().add(new MoveTo(endPoint.getX(), endPoint.getY()));
         }
 
-            myCursor.setPosition(endPoint); //not sure we need this still
+            myCursor.setPosition(endPoint);
 
     }
-
-    //private void draw(Point2D beginPoint, Point2D endPoint, int thickness) {}
 
 
     /**
@@ -235,78 +211,6 @@ public class MyPlane {
 
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   /* private List<Point2D> computeLinePoints (Point2D point1, Point2D point2) { //TODO this has been copypasted into another class!!
-        int x1 = point1.getX();
-        int y1 = point1.getY();
-        int x2 = point2.getX();
-        int y2 = point2.getY();
-
-        int deltaX = Math.abs(x2 - x1);
-        int deltaY = -Math.abs(y2 - y1);
-
-        List<Point2D> linePoints = new LinkedList<Point2D>();
-
-        int sx = x1<x2 ? 1 : -1;
-
-        int sy = y1<y2 ? 1 : -1;
-        int error = deltaX+deltaY;  //error value e_xy
-        while (true) {
-            linePoints.add(new CursorPoint(x1, y1));
-            if (x1 == x2 && y1 == y2) { break; }
-            int error2 = 2 * error;
-            if (error2 >= deltaY) //e_xy+e_x > 0
-            {
-                error += deltaY;
-                x1 += sx;
-            }
-            if (error2 <= deltaX) // e_xy+e_y < 0
-                {
-                error += deltaX;
-                y1 += sy;
-            }
-        }
-        return linePoints;
-    } */
-
 
 }
 

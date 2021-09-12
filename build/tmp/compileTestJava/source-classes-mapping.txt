@@ -1,4 +1,0 @@
-MyPlaneTest.java
- MyPlaneTest
-CommandsTest.java
- CommandsTest

@@ -1,6 +1,8 @@
 package CorePackage;
 
 import Commands.*;
+import Exceptions.InvalidArgumentException;
+import Exceptions.InvalidTokenException;
 import Exceptions.ParsingException;
 import java.util.*;
 
@@ -31,7 +33,7 @@ public class BasicParser {
         registerCommand("PENUP", CmdPenUp::new);
         registerCommand("PENDOWN", CmdPenDown::new);
         registerCommand("HOME", CmdHome::new);
-        registerCommand("REPEAT", CmdRepeat::new);
+        registerCommand("REPEAT", Program::new);
         registerCommand("SETFILLCOLOR", CmdSetFillColor::new);
         registerCommand("SETPENCOLOR", CmdSetPenColor::new);
         registerCommand("SETSCREENCOLOR", CmdSetBackgroundColor::new);
@@ -65,6 +67,7 @@ public class BasicParser {
      */
     public List<Command> parseInstructions(String path) {
         Queue<String> instructionsList = FileReader.readFile(path);
+        System.out.println(path);
         return parseInstructions(instructionsList);
     }
 
@@ -79,16 +82,19 @@ public class BasicParser {
         try {
             while (!instructions.isEmpty()) {
                 String token = instructions.remove();
+
                 if (commandsMap.containsKey(token)) {
                     CheckedFunction<Queue<String>, Command> myFunction = commandsMap.get(token);
                     commandList.add(myFunction.apply(instructions) );
-                }
+                } else throw new InvalidTokenException("Invalid instruction: "+token);
+
             }
         } catch (ParsingException e) {
             System.out.println(e.getMessage());
         }
       return commandList;
     }
+
 
 
 }

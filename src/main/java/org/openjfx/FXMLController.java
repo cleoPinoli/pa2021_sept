@@ -1,37 +1,41 @@
 package org.openjfx;
 
+import java.awt.image.RenderedImage;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.ResourceBundle;
-
 import Commands.CmdClearPlane;
-import Commands.Command;
 import CorePackage.BasicParser;
 import CorePackage.MyPlane;
 import CorePackage.Program;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.control.*;
+import javafx.scene.image.WritableImage;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
+
+import javax.imageio.ImageIO;
 
 public class FXMLController implements Initializable {
 
     private Program myProgram;
     private MyPlane plane;
+
     @FXML
-    private ScrollPane myPane;
+    private ScrollPane scrollPane;
+
+    @FXML
+    private Pane canvas;
 
     @FXML
     private MenuBar menuBar;
+
     @FXML
     private MenuItem resetButton;
 
@@ -60,17 +64,26 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void handleLoadAction(ActionEvent event) {
-        System.out.println("Executed");
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
-        //Node node = (Node) event.getSource();
         File file = fileChooser.showOpenDialog(menuBar.getScene().getWindow());
-         myProgram = new Program(new ArrayList<>(BasicParser.getParser().parseInstructions("/Test.txt"))); //TODO add a "parse" button?
+         myProgram = new Program(new ArrayList<>(BasicParser.getParser().parseInstructions(file.getPath()))); //TODO add a "parse" button?
     }
 
     @FXML
     private void handleExportAction (ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("png files (*.png)", "*.png"));
+        File file = fileChooser.showSaveDialog(null);
 
+        if(file != null){
+            try {
+                WritableImage image = new WritableImage(plane.getWidth(), plane.getHeight());
+                plane.getCanvas().snapshot(new SnapshotParameters(), image);
+                RenderedImage renderedImage = SwingFXUtils.fromFXImage(image, null);
+                ImageIO.write(renderedImage, "png", file);
+            } catch (IOException ex) { ex.printStackTrace(); }
+        }
     }
 
     @FXML
@@ -85,8 +98,8 @@ public class FXMLController implements Initializable {
 
 
 
-    public ScrollPane getMyPane() {
-        return myPane;
+    public Pane getPane() {
+        return canvas;
     }
 
     public void givePlane (MyPlane plane) {

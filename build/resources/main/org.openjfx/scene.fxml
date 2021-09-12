@@ -5,30 +5,31 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.FXMLController">
+<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.FXMLController">
    <children>
       <MenuBar fx:id="menuBar" layoutY="2.0" prefHeight="26.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem fx:id="resetButton" mnemonicParsing="false" text="Reset canvas" onAction="#handleResetAction" />
-                  <MenuItem fx:id="loadButton" mnemonicParsing="false" text="Load instruction file" onAction="#handleLoadAction" />
-              <MenuItem fx:id="exportButton" mnemonicParsing="false" text="Export canvas..." onAction="#handleExportAction" />
+                  <MenuItem fx:id="resetButton" mnemonicParsing="false" onAction="#handleResetAction" text="Reset canvas" />
+                  <MenuItem fx:id="loadButton" mnemonicParsing="false" onAction="#handleLoadAction" text="Load instruction file" />
+                  <MenuItem fx:id="exportButton" mnemonicParsing="false" onAction="#handleExportAction" text="Export canvas..." />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Run">
               <items>
-                <MenuItem fx:id="runNextButton" mnemonicParsing="false" text="Run next instruction" onAction="#handleRunNextAction" />
-                  <MenuItem fx:id="runProgramButton" mnemonicParsing="false" text="Run program" onAction="#handleRunProgramButton" />
+                <MenuItem fx:id="runNextButton" mnemonicParsing="false" onAction="#handleRunNextAction" text="Run next instruction" />
+                  <MenuItem fx:id="runProgramButton" mnemonicParsing="false" onAction="#handleRunProgramButton" text="Run program" />
               </items>
             </Menu>
         </menus>
       </MenuBar>
-      <ScrollPane fx:id="myPane" hbarPolicy="ALWAYS" layoutY="28.0" prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-        </content>
+      <ScrollPane fx:id="scrollPane" hbarPolicy="ALWAYS" layoutY="28.0" prefHeight="200.0" prefViewportHeight="900.0" prefViewportWidth="1440.0" prefWidth="200.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
+         <content>
+            <Pane fx:id="canvas"/>
+         </content>
       </ScrollPane>
    </children>
 </AnchorPane>

@@ -1,5 +1,6 @@
 package Commands;
 import CorePackage.MyPlane;
+import CorePackage.Program;
 import Exceptions.InvalidArgumentException;
 import Exceptions.MissingArgumentException;
 import CorePackage.BasicParser;
@@ -14,8 +15,9 @@ public class CmdRepeat extends BasicCommand {
 
     private int times;
 
-    private List<Command> commandList = new LinkedList<>(); //perhaps not the most optimal solution but i'll see
+    private Program program; //perhaps not the most optimal solution but i'll see
 
+    private List<Command> children;
 
     public CmdRepeat (Queue<String> context) throws InvalidArgumentException, MissingArgumentException {
         String token = "";
@@ -39,7 +41,9 @@ public class CmdRepeat extends BasicCommand {
                 commandTokensSequence.add(token);
                 token = context.remove();
             }
-            commandList.addAll(BasicParser.getParser().parseInstructions(commandTokensSequence));
+            program = new Program(BasicParser.getParser().parseInstructions(commandTokensSequence));
+            //children = new LinkedList<>();
+            //children.addAll(BasicParser.getParser().parseInstructions(commandTokensSequence));
 
 
         }catch (NumberFormatException e2) {
@@ -50,10 +54,14 @@ public class CmdRepeat extends BasicCommand {
 
     @Override
     public void execute(MyPlane plane) {
+       System.out.println(times);
         for (int i=0; i<times; i++) {
-            commandList.stream().forEach(s-> s.execute(plane)); //A/N for testing phase: make sure the order of the cmds is respected. if not, maybe maybe we can review the data structures.
+            program.execute(plane);
+            }
+       //
+            //children.stream().forEach(c -> c.execute(plane));
 
-        }
+        //}
     }
 
     @Override
